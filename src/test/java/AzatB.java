@@ -14,7 +14,7 @@ public class AzatB {
     @Test
 
     public static class FirstScriptTest {
-
+// Проверка input
         @Test
         public void eightComponents() throws InterruptedException {
             ChromeOptions chromeOptions = new ChromeOptions();
@@ -40,7 +40,7 @@ public class AzatB {
 
             driver.quit();
         }
-
+        // Проверка input
         @Test
         public void testSecond() throws InterruptedException {
 
