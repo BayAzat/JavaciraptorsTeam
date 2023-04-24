@@ -1,58 +1,39 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
-import static org.testng.Assert.assertEquals;
-
-public class AzatB {
+public class AzatB extends BaseTest {
     @Test
+    public void textInputTest() {
 
-    public static class FirstScriptTest extends BaseTest {
-// Проверка input
-        @Test
-        public void eightComponents() throws InterruptedException {
+        getDriver().get("https://www.selenium.dev/selenium/web/web-form.html");
 
+        WebElement textInput = getDriver().findElement(By.xpath("//input[@name='my-text']"));
+        WebElement submitButton = getDriver().findElement(By.xpath("//button[@type='submit']"));
 
-            getDriver().get("https://www.selenium.dev/selenium/web/web-form.html");
+        textInput.sendKeys("Selenium");
+        submitButton.click();
 
-            String title = getDriver().getTitle();
-            assertEquals("Web form", title);
+        WebElement message = getDriver().findElement(By.xpath("//p[@id='message']"));
+        String value = message.getText();
 
-            getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-
-            WebElement textBox = getDriver().findElement(By.name("my-text"));
-            WebElement submitButton = getDriver().findElement(By.cssSelector("button"));
-
-            textBox.sendKeys("Selenium");
-            submitButton.click();
-
-            WebElement message = getDriver().findElement(By.id("message"));
-            String value = message.getText();
-            assertEquals("Received!", value);
-        }
-
-        @Test
-        public void testSecond() throws InterruptedException {
-
-            getDriver().get("https://www.selenium.dev/selenium/web/web-form.html");
-
-            String title = getDriver().getTitle();
-            assertEquals("Web form", title);
-
-            Thread.sleep(2000);
-
-            WebElement textBox = getDriver().findElement(By.name("my-text"));
-            WebElement submitButton = getDriver().findElement(By.cssSelector("button"));
-
-            textBox.sendKeys("Selenium");
-            submitButton.click();
-
-            WebElement message = getDriver().findElement(By.id("message"));
-            String value = message.getText();
-            assertEquals("Received!", value);
-        }
+        Assert.assertEquals(value,"Received!");
     }
 
+    @Test
+    public void inputPasswordTest() {
+        getDriver().get("https://www.selenium.dev/selenium/web/web-form.html");
+
+        WebElement inputPassword = getDriver().findElement(By.xpath("//input[@name='my-password']"));
+        WebElement submitButton = getDriver().findElement(By.xpath("//button[@type='submit']"));
+
+        inputPassword.sendKeys("123456qwertY!");
+        submitButton.click();
+
+        WebElement message = getDriver().findElement(By.xpath("//p[@id='message']"));
+        String value = message.getText();
+
+        Assert.assertEquals(value,"Received!");
+    }
 }
